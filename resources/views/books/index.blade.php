@@ -1,73 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Books - Library Management</title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">Library Management System</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('home') }}">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{{ url('/books') }}">Books</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/students') }}">Students</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/librarians') }}">Librarians</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/borrowings') }}">Borrowings</a>
-                    </li>
-                </ul>
-                <div>
-                    <a href="{{ route('logout') }}" class="btn btn-outline-light"
-                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        Logout
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                </div>
-            </div>
-        </div>
-    </nav>
+@extends('layout')
 
-    <!-- Main Content -->
-    <div class="container mt-5">
-        <h2>Books Management</h2>
-        <p>Manage all book information efficiently and with ease.</p>
-        
-        <div class="mb-3">
-            <a href="{{ route('books.create') }}" class="btn btn-primary">Add New Book</a>
-        </div>
-
-        <div class="card">
-            <div class="card-body">
-                <p>Book list will be displayed here.</p>
-                <!-- Add your books table/list here -->
-            </div>
-        </div>
-    </div>
-
-    <footer class="bg-dark text-white text-center py-3 mt-5">
-        <p class="mb-0">© 2024 School Library</p>
-    </footer>
-
-    <!-- Bootstrap 5 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+@section('content')
+<div class="container mt-5">
+    <h2>Book List</h2>
+    <a href="{{ route('books.create') }}" class="btn btn-primary mb-3">Add Book</a>
+    @if ($message = Session::get('success'))
+        <div class="alert alert-success">{{ $message }}</div>
+    @endif
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>BookName</th>
+                <th>Author</th>
+                <th>Publisher</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($books as $book)
+                <tr>
+                    <td>{{ $book->bookname }}</td>
+                    <td>{{ $book->author }}</td>
+                    <td>{{ $book->publisher }}</td>
+                    
+                    
+                    <td>
+                        <a href="{{ route('books.edit', $book->id) }}" class="btn btn-warning">Edit</a>
+                        <form action="{{ route('books.destroy', $book->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
+@endsection
