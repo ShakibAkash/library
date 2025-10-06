@@ -9,37 +9,14 @@
     <style>
         /* Custom CSS for Banner */
         .banner {
-            background: url('{{ asset("images/library-welcome-banner.svg") }}') no-repeat center center;
+            background: url('{{ asset("images/librarybanner.jpg") }}') no-repeat center center;
             background-size: cover;
-            width: 100%;
-            height: 400px;
+            height: 300px;
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-        
-        /* Card styling for uniform appearance */
-        .card {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .card-img-top {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            object-position: center;
-        }
-        
-        .card-body {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .card-text {
-            flex: 1;
+            color: white;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
         }
     </style>
 </head>
@@ -108,7 +85,7 @@
             <!-- Card 2 -->
             <div class="col-md-4">
                 <div class="card">
-                    <img src="{{ asset('images/students.jpg') }}" class="card-img-top" alt="Students">
+                    <img src="{{ asset('images/student.jpg') }}" class="card-img-top" alt="Card 2">
                     <div class="card-body">
                         <h5 class="card-title">Students</h5>
                         <p class="card-text">Browse and manage students offered by your organization.</p>
