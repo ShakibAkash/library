@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\StudentController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\LibrarianController;
 use Illuminate\Support\Facades\Route;
 

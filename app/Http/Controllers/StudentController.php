@@ -11,8 +11,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        // You can replace with real data later
-        return view('students.index');
+        $students = Student::all();
+        return view('students.index', compact('students'));
     }
 
     /**
@@ -28,9 +28,16 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        // TODO: validate and save
-        return redirect()->route('students.index')
-            ->with('status', 'Student created (placeholder).');
+      
+        $request->validate([
+            'studentname' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+        ]);
+
+        Student::create($request->all());
+        return redirect()->route('students.index')->with('success', 'Student created successfully.');
+
     }
 
     /**
@@ -46,7 +53,8 @@ class StudentController extends Controller
      */
     public function edit(string $id)
     {
-        return view('students.edit', compact('id'));
+       return view('students.edit', compact('student'));
+
     }
 
     /**
@@ -54,9 +62,8 @@ class StudentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // TODO: validate and update
-        return redirect()->route('students.index')
-            ->with('status', 'Student updated (placeholder).');
+        $student->update($request->only(['studentname', 'email', 'phone']));
+        return redirect()->route('students.index')->with('success', 'Student updated successfully.');
     }
 
     /**
@@ -64,8 +71,7 @@ class StudentController extends Controller
      */
     public function destroy(string $id)
     {
-        // TODO: delete
-        return redirect()->route('students.index')
-            ->with('status', 'Student deleted (placeholder).');
+         $student->delete();
+        return redirect()->route('students.index')->with('success', 'Student deleted successfully!');
     }
 }
