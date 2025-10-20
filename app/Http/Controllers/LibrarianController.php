@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Librarian;
 use Illuminate\Http\Request;
 
 class LibrarianController extends Controller
@@ -11,7 +12,9 @@ class LibrarianController extends Controller
      */
     public function index()
     {
-        return view('librarians.index');
+        $librarians = Librarian::all();
+        return view('librarians.index', compact('librarians'));
+
     }
 
     /**
@@ -27,8 +30,17 @@ class LibrarianController extends Controller
      */
     public function store(Request $request)
     {
-        return redirect()->route('librarians.index')
-            ->with('status', 'Librarian created (placeholder).');
+    $request->validate([
+        'name' => 'required',
+        'email' => 'required',
+        'phone' => 'required',
+]);
+
+    Librarian::create($request->all());
+
+    return redirect()->route('librarians.index')
+    ->with('success', 'Librarian created successfully.');
+
     }
 
     /**
@@ -44,7 +56,10 @@ class LibrarianController extends Controller
      */
     public function edit(string $id)
     {
-        return view('librarians.edit', compact('id'));
+      $librarian = Librarian::findOrFail($id);
+      return view('librarians.edit', compact('librarian'));
+
+
     }
 
     /**
@@ -52,8 +67,10 @@ class LibrarianController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        return redirect()->route('librarians.index')
-            ->with('status', 'Librarian updated (placeholder).');
+        $librarian = Librarian::findOrFail($id);
+        $librarian->update($request->only(['name', 'email', 'phone']));
+        return redirect()->route('librarians.index')->with('success', 'Librarian updated successfully.');
+
     }
 
     /**
@@ -61,7 +78,9 @@ class LibrarianController extends Controller
      */
     public function destroy(string $id)
     {
-        return redirect()->route('librarians.index')
-            ->with('status', 'Librarian deleted (placeholder).');
+        $librarian = Librarian::findOrFail($id);
+        $librarian->delete();
+        return redirect()->route('librarians.index')->with('success', 'Librarian deleted successfully!');
+
     }
 }
