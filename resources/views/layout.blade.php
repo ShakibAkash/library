@@ -112,6 +112,11 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link {{ Request::is('catalog') ? 'active' : '' }}" href="{{ route('books.catalog') }}">
+                            <i class="fas fa-book-open me-1"></i>Catalog
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link {{ Request::is('books*') ? 'active' : '' }}" href="{{ url('/books') }}">
                             <i class="fas fa-book me-1"></i>Books
                         </a>

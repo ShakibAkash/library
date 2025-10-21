@@ -31,6 +31,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    // Book catalog route
+    Route::get('/catalog', [BookController::class, 'catalog'])->name('books.catalog');
+    
     // Students, Books & Librarians REST routes
     Route::resource('students', StudentController::class);
     Route::resource('books', BookController::class);
@@ -40,7 +43,12 @@ Route::middleware('auth')->group(function () {
 
 // Add your /home route here
 Route::get('/home', function () {
-    return view('home');
+    $booksCount = \App\Models\Book::count();
+    $studentsCount = \App\Models\Student::count();
+    $librariansCount = \App\Models\Librarian::count();
+    $borrowingsCount = \App\Models\Borrowing::count();
+    
+    return view('home', compact('booksCount', 'studentsCount', 'librariansCount', 'borrowingsCount'));
 })->middleware(['auth'])->name('home');
 
 require __DIR__.'/auth.php';

@@ -291,6 +291,9 @@
                         <a class="nav-link active" href="{{ route('home') }}"><i class="fas fa-home me-1"></i>Home</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('books.catalog') }}"><i class="fas fa-book-open me-1"></i>Catalog</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ url('/books') }}"><i class="fas fa-book me-1"></i>Books</a>
                     </li>
                     <li class="nav-item">
@@ -330,22 +333,22 @@
             <div class="row">
                 <div class="col-md-3 stat-item">
                     <i class="fas fa-book"></i>
-                    <h3>1000+</h3>
+                    <h3>{{ $booksCount ?? 0 }}{{ $booksCount > 0 ? '+' : '' }}</h3>
                     <p>Books</p>
                 </div>
                 <div class="col-md-3 stat-item">
                     <i class="fas fa-user-graduate"></i>
-                    <h3>500+</h3>
+                    <h3>{{ $studentsCount ?? 0 }}{{ $studentsCount > 0 ? '+' : '' }}</h3>
                     <p>Students</p>
                 </div>
                 <div class="col-md-3 stat-item">
                     <i class="fas fa-user-tie"></i>
-                    <h3>50+</h3>
+                    <h3>{{ $librariansCount ?? 0 }}{{ $librariansCount > 0 ? '+' : '' }}</h3>
                     <p>Librarians</p>
                 </div>
                 <div class="col-md-3 stat-item">
                     <i class="fas fa-exchange-alt"></i>
-                    <h3>2000+</h3>
+                    <h3>{{ $borrowingsCount ?? 0 }}{{ $borrowingsCount > 0 ? '+' : '' }}</h3>
                     <p>Borrowings</p>
                 </div>
             </div>
@@ -358,8 +361,24 @@
             <h2 class="section-title">Our Services</h2>
         </div>
         <div class="row g-4">
+            <!-- Card 0 - Catalog -->
+            <div class="col-md-3">
+                <div class="feature-card card">
+                    <div class="card-img-overlay-container">
+                        <img src="{{ asset('images/catalog.jpg') }}" class="card-img-top" alt="Catalog">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-book-open me-2"></i>Book Catalog</h5>
+                        <p class="card-text">Browse our complete collection of books with beautiful cover images and detailed information.</p>
+                        <a href="{{ route('books.catalog') }}" class="btn btn-primary">
+                            <i class="fas fa-search me-2"></i>Browse Catalog
+                        </a>
+                    </div>
+                </div>
+            </div>
+
             <!-- Card 1 - Books -->
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="feature-card card">
                     <div class="card-img-overlay-container">
                         <img src="{{ asset('images/book.jpg') }}" class="card-img-top" alt="Books">
@@ -375,7 +394,7 @@
             </div>
 
             <!-- Card 2 - Students -->
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="feature-card card">
                     <div class="card-img-overlay-container">
                         <img src="{{ asset('images/students.jpg') }}" class="card-img-top" alt="Students">
@@ -391,7 +410,7 @@
             </div>
 
             <!-- Card 3 - Librarians -->
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="feature-card card">
                     <div class="card-img-overlay-container">
                         <img src="{{ asset('images/librarian.jpg') }}" class="card-img-top" alt="Librarians">
