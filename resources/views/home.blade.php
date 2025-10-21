@@ -16,17 +16,36 @@
             --secondary-color: #8b4513;
             --accent-color: #d4af37;
             --light-bg: #f8f9fa;
+            --dark-text: #2c3e50;
+            --card-bg: #ffffff;
+            --navbar-gradient-1: #1e3c72;
+            --navbar-gradient-2: #2a5298;
+        }
+        
+        /* Dark Mode Colors */
+        body.dark-mode {
+            --primary-color: #ffffff;
+            --secondary-color: #8ab4f8;
+            --accent-color: #ff6b6b;
+            --light-bg: #2d3142;
+            --dark-text: #ffffff;
+            --card-bg: #3d3f52;
+            --navbar-gradient-1: #2d3142;
+            --navbar-gradient-2: #3d3f52;
         }
         
         body {
             font-family: 'Poppins', sans-serif;
             background-color: var(--light-bg);
+            color: var(--dark-text);
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         
         .navbar {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%) !important;
+            background: linear-gradient(135deg, var(--navbar-gradient-1) 0%, var(--navbar-gradient-2) 100%) !important;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             padding: 1rem 0;
+            transition: background 0.3s ease;
         }
         
         .navbar-brand {
@@ -273,6 +292,123 @@
             border-color: var(--accent-color);
             color: var(--primary-color);
         }
+        
+        /* Dark Mode Toggle Button */
+        .dark-mode-toggle {
+            background: transparent;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+        
+        .dark-mode-toggle:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.1);
+        }
+        
+        .dark-mode-toggle i {
+            font-size: 1.3rem;
+            transition: all 0.4s ease;
+            color: white;
+        }
+        
+        .dark-mode-toggle:hover i {
+            transform: rotate(180deg);
+        }
+        
+        body.dark-mode .dark-mode-toggle {
+            background: transparent;
+        }
+        
+        body.dark-mode .dark-mode-toggle:hover {
+            background: rgba(255, 167, 38, 0.2);
+        }
+        
+        body.dark-mode .dark-mode-toggle i {
+            color: #ffa726;
+        }
+        
+        /* Dark Mode Adjustments */
+        body.dark-mode .feature-card {
+            background-color: var(--card-bg);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        body.dark-mode .feature-card:hover {
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        body.dark-mode .feature-card .card-title {
+            color: var(--primary-color);
+        }
+        
+        body.dark-mode .feature-card .card-text {
+            color: #c5c7ca;
+        }
+        
+        body.dark-mode .feature-card .btn {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            color: #ffffff;
+        }
+        
+        body.dark-mode .feature-card .btn:hover {
+            background: linear-gradient(135deg, #ff8787 0%, #ff7a8a 100%);
+            color: #ffffff;
+        }
+        
+        body.dark-mode .stats-section {
+            background: linear-gradient(135deg, var(--navbar-gradient-1) 0%, var(--navbar-gradient-2) 100%);
+        }
+        
+        body.dark-mode .stat-item i {
+            color: var(--accent-color);
+        }
+        
+        body.dark-mode .dark-mode-toggle:hover {
+            background: rgba(255, 107, 107, 0.2);
+        }
+        
+        body.dark-mode .dark-mode-toggle i {
+            color: #ff6b6b;
+        }
+        
+        body.dark-mode .stats-section {
+            background: linear-gradient(135deg, var(--navbar-gradient-1) 0%, var(--navbar-gradient-2) 100%);
+        }
+        
+        body.dark-mode footer {
+            background: linear-gradient(135deg, var(--navbar-gradient-1) 0%, var(--navbar-gradient-2) 100%);
+        }
+        
+        body.dark-mode .banner {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{ asset("images/librarybanner.jpg") }}') no-repeat center center;
+            background-size: cover;
+        }
+        
+        body.dark-mode .banner::before {
+            background: linear-gradient(45deg, rgba(30, 60, 114, 0.3), rgba(139, 69, 19, 0.2));
+        }
+        
+        /* Dark Mode - Info Section */
+        body.dark-mode .bg-white {
+            background-color: var(--card-bg) !important;
+        }
+        
+        body.dark-mode .text-muted {
+            color: #c5c7ca !important;
+        }
+        
+        body.dark-mode h3 {
+            color: var(--primary-color) !important;
+        }
     </style>
 </head>
 <body>
@@ -306,7 +442,10 @@
                         <a class="nav-link" href="{{ url('/borrowings') }}"><i class="fas fa-exchange-alt me-1"></i>Borrowings</a>
                     </li>
                 </ul>
-                <div>
+                <div class="d-flex align-items-center">
+                    <button class="dark-mode-toggle text-white border-0" id="darkModeToggle" title="Toggle Dark Mode">
+                        <i class="fas fa-moon" id="darkModeIcon"></i>
+                    </button>
                     <a href="{{ route('logout') }}" class="btn btn-outline-light"
                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="fas fa-sign-out-alt me-1"></i>Logout
@@ -476,5 +615,35 @@
 
     <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Dark Mode Script -->
+    <script>
+        // Check for saved dark mode preference
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const darkModeIcon = document.getElementById('darkModeIcon');
+        const body = document.body;
+        
+        // Load saved preference
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            body.classList.add('dark-mode');
+            darkModeIcon.classList.remove('fa-moon');
+            darkModeIcon.classList.add('fa-sun');
+        }
+        
+        // Toggle dark mode
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                darkModeIcon.classList.remove('fa-moon');
+                darkModeIcon.classList.add('fa-sun');
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                darkModeIcon.classList.remove('fa-sun');
+                darkModeIcon.classList.add('fa-moon');
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        });
+    </script>
 </body>
 </html>

@@ -221,7 +221,63 @@
         font-size: 14px;
         opacity: 0.9;
     }
+
+    /* Dark Mode Styles */
+    body.dark-mode .book-card {
+        background: #3d3f52;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    body.dark-mode .book-card:hover {
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    body.dark-mode .book-title {
+        color: #ffffff;
+    }
+
+    body.dark-mode .book-author {
+        color: #c5c7ca;
+    }
+
+    body.dark-mode .book-genre {
+        background: rgba(255, 107, 107, 0.2);
+        color: #ff6b6b;
+    }
+
+    body.dark-mode .book-rating {
+        color: #ffa726;
+    }
+
+    body.dark-mode .alphabet-nav {
+        background: #3d3f52;
+    }
+
+    body.dark-mode .alphabet-nav a {
+        background: #2d3142;
+        color: #ff6b6b;
+    }
+
+    body.dark-mode .alphabet-nav a:hover {
+        background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+        color: white;
+    }
+
+    body.dark-mode .alphabet-nav a.active {
+        background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+        color: white;
+    }
+
+    body.dark-mode .letter-header {
+        color: #ffffff;
+        border-bottom-color: #ff6b6b;
+    }
+
+    body.dark-mode .book-cover {
+        background: #2d3142;
+    }
 </style>
+```
 @endsection
 
 @section('content')
