@@ -22,7 +22,7 @@ class BorrowingController extends Controller
      */
     public function create()
     {
-         return view('borrowing.create');
+         return view('borrowings.create');
     }
 
     /**
@@ -55,7 +55,7 @@ return redirect()->route('borrowings.index')->with('success', 'Borrowing created
      */
     public function edit(Borrowing $borrowing)
     {
-         return view('borrowing.edit', compact('borrowing'));
+         return view('borrowings.edit', compact('borrowing'));
     }
 
     /**

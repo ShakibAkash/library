@@ -35,7 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('students', StudentController::class);
     Route::resource('books', BookController::class);
     Route::resource('librarians', LibrarianController::class);
-    Route::resource('borrowing', BorrowingController::class);
+    Route::resource('borrowings', BorrowingController::class);
 });
 
 // Add your /home route here
