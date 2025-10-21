@@ -10,6 +10,6 @@ class Book extends Model
     use HasFactory;
 
     protected $fillable = [
-        'studentname', 'email', 'phone', // Add the fields you want to allow
+        'title', 'author', 'publisher', 'slug', 'description', 'cover_url',
     ];
 }

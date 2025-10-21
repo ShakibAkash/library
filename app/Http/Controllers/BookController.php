@@ -31,7 +31,7 @@ class BookController extends Controller
     public function store(Request $request)
     {
          $request->validate([
-            'bookname' => 'required',
+            'title' => 'required',
             'author' => 'required',
             'publisher' => 'required',
         ]);
@@ -62,7 +62,7 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        $book->update($request->only(['bookname', 'author', 'publisher']));
+        $book->update($request->only(['title', 'author', 'publisher']));
         return redirect()->route('books.index')->with('success', 'Book updated successfully.');
 
 
