@@ -72,15 +72,21 @@
     }
 
     body.dark-mode .table {
-        color: #ffffff;
+        color: #ffffff !important;
+        background-color: #3d3f52 !important;
+    }
+    
+    body.dark-mode .table tbody td,
+    body.dark-mode .table tbody tr,
+    body.dark-mode .table td,
+    body.dark-mode .table th {
+        color: #ffffff !important;
+        background-color: transparent !important;
+        border-color: #2d3142 !important;
     }
 
     body.dark-mode .table tbody tr:hover {
-        background-color: rgba(255, 107, 107, 0.1);
-    }
-
-    body.dark-mode .table tbody td {
-        border-color: #2d3142;
+        background-color: rgba(255, 107, 107, 0.1) !important;
     }
 
     body.dark-mode .btn-edit-student {

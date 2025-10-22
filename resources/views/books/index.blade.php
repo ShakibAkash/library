@@ -17,9 +17,27 @@
         box-shadow: 0 15px 35px rgba(0,0,0,0.15);
     }
     
-    .book-icon {
+    .book-cover-container {
         width: 100%;
-        height: 200px;
+        height: 320px;
+        background: #f8f9fa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .book-cover-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+    }
+    
+    .book-cover-placeholder {
+        width: 100%;
+        height: 100%;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         display: flex;
         align-items: center;
@@ -82,21 +100,44 @@
     }
 
     /* Dark Mode Styles */
+    body.dark-mode .book-card {
+        background-color: #3d3f52;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    }
+    
+    body.dark-mode .book-card .card-title {
+        color: #ffffff;
+    }
+    
+    body.dark-mode .book-meta {
+        color: #c5c7ca;
+    }
+    
+    body.dark-mode .book-cover-container {
+        background: #2d3142;
+    }
+
     body.dark-mode .book-table {
         background: #3d3f52;
         box-shadow: 0 5px 20px rgba(0,0,0,0.3);
     }
 
     body.dark-mode .table {
-        color: #ffffff;
+        color: #ffffff !important;
+        background-color: #3d3f52 !important;
+    }
+    
+    body.dark-mode .table tbody td,
+    body.dark-mode .table tbody tr,
+    body.dark-mode .table td,
+    body.dark-mode .table th {
+        color: #ffffff !important;
+        background-color: transparent !important;
+        border-color: #2d3142 !important;
     }
 
     body.dark-mode .table tbody tr:hover {
-        background-color: rgba(255, 107, 107, 0.1);
-    }
-
-    body.dark-mode .table tbody td {
-        border-color: #2d3142;
+        background-color: rgba(255, 107, 107, 0.1) !important;
     }
 
     body.dark-mode .btn-edit {
@@ -145,8 +186,14 @@
         @foreach ($books as $book)
             <div class="col-md-4 col-lg-3">
                 <div class="book-card card">
-                    <div class="book-icon">
-                        <i class="fas fa-book-open"></i>
+                    <div class="book-cover-container">
+                        @if($book->cover_url)
+                            <img src="{{ asset($book->cover_url) }}" alt="{{ $book->title }}">
+                        @else
+                            <div class="book-cover-placeholder">
+                                <i class="fas fa-book-open"></i>
+                            </div>
+                        @endif
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">{{ $book->title }}</h5>

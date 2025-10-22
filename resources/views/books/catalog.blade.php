@@ -107,6 +107,7 @@
         width: 100%;
         height: 320px;
         object-fit: contain;
+        object-position: center;
         display: block;
         background: #f8f9fa;
     }
