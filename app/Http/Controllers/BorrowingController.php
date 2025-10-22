@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Borrowing;
+use App\Models\Book;
 use Illuminate\Http\Request;
 
 class BorrowingController extends Controller
@@ -22,7 +23,8 @@ class BorrowingController extends Controller
      */
     public function create()
     {
-         return view('borrowings.create');
+         $books = Book::all();
+         return view('borrowings.create', compact('books'));
     }
 
     /**
@@ -49,13 +51,13 @@ return redirect()->route('borrowings.index')->with('success', 'Borrowing created
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Borrowing $borrowing)
     {
-         return view('borrowings.edit', compact('borrowing'));
+         $books = Book::all();
+         return view('borrowings.edit', compact('borrowing', 'books'));
     }
 
     /**

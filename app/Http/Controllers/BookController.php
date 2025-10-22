@@ -39,7 +39,7 @@ class BookController extends Controller
         ->when($letter, function($query, $letter) {
             return $query->where('title', 'like', $letter . '%');
         })
-        ->orderBy('created_at', 'desc')
+        ->orderBy('title', 'asc')
         ->get();
         
         return view('books.catalog', compact('books', 'search', 'letter'));

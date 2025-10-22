@@ -175,18 +175,6 @@
             </div>
         </div>
 
-        <!-- Cover Image URL -->
-        <div class="mb-4">
-            <label class="form-label">
-                <i class="fas fa-link me-2"></i>OR Enter Cover Image URL
-            </label>
-            <input type="url" name="cover_url" id="cover_url" value="{{ old('cover_url', $book->cover_url) }}" class="form-control" placeholder="https://example.com/book-cover.jpg">
-            <small class="text-muted">If you don't upload an image, you can paste a direct URL instead</small>
-            @error('cover_url')
-                <div class="text-danger mt-1"><small>{{ $message }}</small></div>
-            @enderror
-        </div>
-
         <div class="mb-4">
             <label for="status" class="form-label">
                 <i class="fas fa-info-circle me-2"></i>Status

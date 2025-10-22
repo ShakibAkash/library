@@ -24,9 +24,22 @@
         transition: all 0.3s ease;
     }
     
-    .form-control:focus {
+    .form-select {
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        padding: 0.75rem 1rem;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    
+    .form-control:focus,
+    .form-select:focus {
         border-color: var(--accent-color);
         box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.25);
+    }
+    
+    .form-select option {
+        padding: 0.5rem;
     }
     
     .btn-submit {
@@ -84,7 +97,12 @@
             <label for="bookname" class="form-label">
                 <i class="fas fa-book me-2"></i>Book Name *
             </label>
-            <input type="text" name="bookname" id="bookname" class="form-control" placeholder="Enter book name" required>
+            <select name="bookname" id="bookname" class="form-control form-select" required>
+                <option value="">Select a book from catalog</option>
+                @foreach($books as $book)
+                    <option value="{{ $book->title }}">{{ $book->title }} - {{ $book->author }}</option>
+                @endforeach
+            </select>
             @error('bookname')
                 <div class="text-danger mt-1"><small>{{ $message }}</small></div>
             @enderror
